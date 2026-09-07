@@ -1,0 +1,23 @@
+{
+  "swarms": {
+    "swarm-1788399575060-vyvaye": {
+      "swarmId": "swarm-1788399575060-vyvaye",
+      "topology": "hierarchical",
+      "maxAgents": 8,
+      "status": "running",
+      "agents": [],
+      "tasks": [],
+      "config": {
+        "topology": "hierarchical",
+        "maxAgents": 8,
+        "strategy": "specialized",
+        "communicationProtocol": "message-bus",
+        "autoScaling": true,
+        "consensusMechanism": "majority"
+      },
+      "createdAt": "2026-09-03T01:39:35.060Z",
+      "updatedAt": "2026-09-03T01:39:35.060Z"
+    }
+  },
+  "version": "3.0.0"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "swarm-1788399575060-vyvaye",
+  "topology": "hierarchical",
+  "maxAgents": 8,
+  "strategy": "specialized",
+  "v3Mode": false,
+  "permissions": null,
+  "initializedAt": "2026-09-03T01:39:35.060Z",
+  "status": "ready"
+}
