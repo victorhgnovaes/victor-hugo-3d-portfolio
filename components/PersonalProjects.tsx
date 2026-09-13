@@ -10,7 +10,7 @@ import SectionIntro from "./SectionIntro";
 import { useLanguage } from "./i18n/LanguageProvider";
 
 function PersonalVisual({ type }: { type: string }) {
-  if (type === "clinic") return <div className="miniClinic miniClinicCover"><Image src="/novatech-cover.png" alt="Interface do sistema de gestão clínica NovaTech" fill sizes="(max-width: 760px) 100vw, 60vw" /><span className="clinicCoverFade" /><em>NOVATECH / CLINIC MANAGEMENT</em></div>;
+  if (type === "clinic") return <div className="miniClinic miniClinicCover"><Image src="/novatech-portfolio.png" alt="Painéis administrativo, médico e paciente do sistema NovaTech" fill sizes="(max-width: 760px) 100vw, 60vw" /><span className="clinicCoverFade" /><em>NOVATECH / CLINIC MANAGEMENT</em></div>;
   if (type === "game") return <div className="miniGame"><Image src="/phazion-quest-cover.jpeg" alt="Capa de Phazion Quest" fill sizes="(max-width: 760px) 100vw, 33vw" /><span className="gameCoverFade" /><em>SOLO / FRAME BY FRAME</em></div>;
   return <div className="miniAgent"><div><span>AGENT / WORKSPACE</span>{["> read context", "> plan change", "> edit files", "> run tests", "✓ complete"].map(x => <i key={x}>{x}</i>)}</div></div>;
 }
@@ -49,7 +49,7 @@ export default function PersonalProjects() {
     {videoOpen && createPortal(<div className="projectVideoBackdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setVideoOpen(false); }}>
       <div className="projectVideoDialog" role="dialog" aria-modal="true" aria-label={text("Vídeo do sistema NovaTech", "NovaTech system video")}>
         <button className="projectVideoClose" type="button" autoFocus onClick={() => setVideoOpen(false)} aria-label={text("Fechar vídeo", "Close video")}>×</button>
-        <video src="/novatech-demo.mp4" poster="/novatech-cover.png" controls autoPlay playsInline preload="metadata" />
+        <video src="/novatech-demo.mp4" poster="/novatech-portfolio.png" controls autoPlay playsInline preload="metadata" />
       </div>
     </div>, document.body)}
   </section></Reveal>;
