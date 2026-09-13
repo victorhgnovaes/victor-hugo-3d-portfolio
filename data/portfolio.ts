@@ -47,7 +47,7 @@ export const professionalProjects = [
 ];
 
 export const personalProjects = [
-  { code: "N", title: "NovaTech", subtitle: "Clinic Management System", year: "2026", visual: "clinic", description: "Sistema desktop para gerenciamento de clínica com perfis de paciente, médico e administrativo.", features: ["Login", "Agendamento", "Pacientes", "Médicos", "Especialidades", "Agenda", "Relatórios"], stack: ["C#", "Windows Forms", "PostgreSQL", "SQL"] },
+  { code: "N", title: "NovaTech", subtitle: "Clinic Management System", year: "2026", visual: "clinic", description: "Sistema desktop para gerenciamento de clínica com perfis de paciente, médico e administrativo.", features: ["Login", "Agendamento", "Pacientes", "Médicos", "Especialidades", "Agenda", "Relatórios"], stack: ["C#", "Windows Forms", "PostgreSQL", "SQL"], codeUrl: "https://github.com/victorhgnovaes/novatech-clinic-management" },
   { code: "P", title: "Phazion Quest", subtitle: "Solo · Hand-drawn 2D Game", year: "2026", visual: "game", description: "Jogo 2D autoral desenvolvido individualmente no Scratch, com arte e animações produzidas à mão frame a frame.", features: ["OOP", "Movimentação", "Colisões", "Combate", "Enemy AI", "Scrum"], stack: ["Scratch", "Frame-by-frame", "Game Development", "OOP"], link: "https://scratch.mit.edu/projects/1216501586/" },
   { code: "A", title: "AI Engineering Lab", subtitle: "Agentic Development Practice", year: "2026", visual: "agent", description: "Ambiente de prática para planejamento, implementação, debugging e refatoração assistidos por agentes.", features: ["Agents", "Automation", "Context Engineering", "Debugging", "Refactoring"], stack: ["OpenAI Codex", "Claude Code", "GitHub Copilot", "Cursor"] },
 ];

@@ -3,6 +3,8 @@
 import { personalProjects } from "@/data/portfolio";
 import Image from "next/image";
 import { SiScratch } from "react-icons/si";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Reveal from "./Reveal";
 import SectionIntro from "./SectionIntro";
 import { useLanguage } from "./i18n/LanguageProvider";
@@ -15,6 +17,15 @@ function PersonalVisual({ type }: { type: string }) {
 
 export default function PersonalProjects() {
   const { locale, text } = useLanguage();
+  const [videoOpen, setVideoOpen] = useState(false);
+  useEffect(() => {
+    if (!videoOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setVideoOpen(false);
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [videoOpen]);
   const featuredProjects = personalProjects.filter((project) => project.visual !== "agent");
   const english = {
     clinic: { subtitle: "Clinic Management System", description: "Desktop system for clinic management with patient, doctor and administrator profiles." },
@@ -24,15 +35,22 @@ export default function PersonalProjects() {
     <SectionIntro index="06" label={text("PROJETOS AUTORAIS / EXPERIMENTOS", "SIDE PROJECTS / EXPERIMENTS")} title={<>{text("Mundos diferentes,", "Different worlds,")}<br /><span>{text("uma prática de engenharia.", "one engineering practice.")}</span></>} aside={text("Um sistema de gestão clínica e um jogo autoral apresentados como ambientes digitais distintos.", "A clinical management system and an original game presented as distinct digital environments.")} />
     <div className="personalList">{featuredProjects.map((project, index) => {
       const projectLink = "link" in project ? project.link : undefined;
+      const codeUrl = "codeUrl" in project ? project.codeUrl : undefined;
       const chapterId = project.visual === "clinic" ? "novatech" : project.visual === "game" ? "phazion" : undefined;
       return <article id={chapterId} key={project.title} className={`personalChapter ${projectLink ? "personalLinked" : ""}`}>
         <div className="personalMeta"><span>0{index + 1}</span><span>{project.year}</span></div>
         <div className="personalVisual"><PersonalVisual type={project.visual} /></div>
         <div className="personalCopy"><p>{locale === "pt" ? project.subtitle : english[project.visual as keyof typeof english]?.subtitle ?? project.subtitle}</p><h3>{project.title}</h3><p>{locale === "pt" ? project.description : english[project.visual as keyof typeof english]?.description ?? project.description}</p><div className="stack">{project.stack.map(x => <span key={x}>{x}</span>)}</div>
-          {project.visual === "clinic" && <><span className="projectAvailability projectInProgress">{text("DESENVOLVIMENTO EM PROGRESSO", "DEVELOPMENT IN PROGRESS")}</span><div className="projectActions personalProjectActions"><button className="projectButton projectButtonPrimary" disabled>{text("VÍDEO ILUSTRATIVO", "DEMO VIDEO")} <small>{text("EM BREVE", "COMING SOON")}</small></button></div></>}
+          {project.visual === "clinic" && <><span className="projectAvailability projectInProgress">{text("DESENVOLVIMENTO EM PROGRESSO", "DEVELOPMENT IN PROGRESS")}</span><div className="projectActions personalProjectActions"><button className="projectButton projectButtonPrimary" type="button" onClick={() => setVideoOpen(true)}>{text("ASSISTIR VÍDEO", "WATCH VIDEO")} <span aria-hidden="true">▶</span></button>{codeUrl && <a className="projectButton" href={codeUrl} target="_blank" rel="noreferrer">{text("VER CÓDIGO", "VIEW CODE")} <span aria-hidden="true">↗</span></a>}</div></>}
           {projectLink && <a className="scratchLink" href={projectLink} target="_blank" rel="noreferrer" aria-label={text("Jogar Phazion Quest no Scratch", "Play Phazion Quest on Scratch")}><span><SiScratch aria-hidden="true" /> {text("JOGAR NO SCRATCH", "PLAY ON SCRATCH")}</span><i>↗</i></a>}
         </div>
       </article>;
     })}</div>
+    {videoOpen && createPortal(<div className="projectVideoBackdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setVideoOpen(false); }}>
+      <div className="projectVideoDialog" role="dialog" aria-modal="true" aria-label={text("Vídeo do sistema NovaTech", "NovaTech system video")}>
+        <button className="projectVideoClose" type="button" autoFocus onClick={() => setVideoOpen(false)} aria-label={text("Fechar vídeo", "Close video")}>×</button>
+        <video src="/novatech-demo.mp4" poster="/novatech-cover.png" controls autoPlay playsInline preload="metadata" />
+      </div>
+    </div>, document.body)}
   </section></Reveal>;
 }
