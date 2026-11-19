@@ -3,7 +3,10 @@
 import { profile } from "@/data/portfolio";
 import { FaGithub, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
-import Reveal from "./Reveal";
+import Image from "next/image";
+import { FiArrowUp, FiArrowUpRight } from "react-icons/fi";
+import StudioSection from "./StudioSection";
+import styles from "./StudioSection.module.css";
 import { useLanguage } from "./i18n/LanguageProvider";
 
 const contacts = [
@@ -15,32 +18,32 @@ const contacts = [
 
 export default function Contact() {
   const { text } = useLanguage();
-  return (
-    <Reveal>
-      <section className="contact shell" id="contact">
-        <div className="sectionMarker"><span>08</span><span>{text("CONTATO","CONTACT")}</span></div>
-        <div className="contactTitle">
-          <p>{text("TEM UM PROJETO OU OPORTUNIDADE?","HAVE A PROJECT OR OPPORTUNITY?")}</p>
-          <h2>{text("VAMOS CRIAR","LET'S BUILD")}<span>{text("ALGO.","SOMETHING.")}</span></h2>
+  return <StudioSection id="contact" titleId="contact-title" background="/studio-technology-background.png">
+    <div className={styles.twoColumn}>
+      <div className={`${styles.intro} ${styles.contactIntro}`}>
+        <span className={styles.eyebrow}>{text("CONTATO", "CONTACT")}</span>
+        <h2 id="contact-title">{text("Vamos criar", "Let's build")}<br /><span>{text("algo juntos.", "together.")}</span></h2>
+        <p>{text("Tem um projeto ou uma oportunidade? Vamos conversar.", "Have a project or an opportunity? Let's talk.")}</p>
+        <div className={styles.contactLead}>{text("Disponível para oportunidades em desenvolvimento de software e para construir produtos digitais com interfaces, arquitetura, dados e Inteligência Artificial.", "Available for software development opportunities and for building digital products with interfaces, architecture, data and Artificial Intelligence.")}</div>
+      </div>
+      <div className={styles.panel}>
+        <div className={styles.contactLinks}>
+          {contacts.map(({ label, detail, href, icon: Icon }) => <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${label}: ${detail}`}>
+            <Icon aria-hidden="true" /><span><b>{label === "WHATSAPP" ? "WhatsApp" : label === "EMAIL" ? "E-mail" : label === "LINKEDIN" ? "LinkedIn" : "GitHub"}</b><small>{detail}</small></span><FiArrowUpRight aria-hidden="true" />
+          </a>)}
+          {profile.links.resume && <a href={profile.links.resume} target="_blank" rel="noopener noreferrer"><span><b>{text("Currículo", "Resume")}</b></span><FiArrowUpRight aria-hidden="true" /></a>}
         </div>
-        <div className="contactBottom">
-          <p>{text("Disponível para oportunidades em desenvolvimento de software e para construir produtos digitais com interfaces, arquitetura, dados e Inteligência Artificial.","Available for software development opportunities and for building digital products with interfaces, architecture, data and Artificial Intelligence.")}</p>
-          <div className="contactLinks">
-            {contacts.map(({ label, detail, href, icon: Icon }) => (
-              <a key={label} href={href} target="_blank" rel="noreferrer" aria-label={`${label}: ${detail}`}>
-                <span className="contactIdentity"><i><Icon aria-hidden="true" /></i><span><b>{label}</b><small>{detail}</small></span></span>
-                <span className="contactArrow">↗</span>
-              </a>
-            ))}
-            {profile.links.resume && <a href={profile.links.resume} target="_blank" rel="noreferrer"><span>RESUME</span><span>↗</span></a>}
-          </div>
-        </div>
-        <footer className="siteFooter">
-          <div className="footerSignature"><span>{text("DESENVOLVIDO POR", "DEVELOPED BY")}</span><strong>VICTOR HUGO</strong><small>© 2026 · {text("DESENVOLVEDOR DE SOFTWARE", "SOFTWARE DEVELOPER")}</small></div>
-          <div className="footerTechnology"><span>{text("TECNOLOGIAS DO PORTFÓLIO", "PORTFOLIO TECHNOLOGIES")}</span><div>{["NEXT.JS", "REACT", "TYPESCRIPT", "THREE.JS", "R3F", "GSAP"].map((technology) => <i key={technology}>{technology}</i>)}</div></div>
-          <a className="footerTop" href="#top"><span>{text("VOLTAR AO TOPO", "BACK TO TOP")}</span><i>↑</i></a>
-        </footer>
-      </section>
-    </Reveal>
-  );
+      </div>
+    </div>
+    <footer className={styles.footer}>
+      <div className={styles.signature}>
+        <a href="#top" className="brand brandSignature" aria-label={text("Voltar ao início", "Back to top")}><Image src="/nova-abertura/05_vh_manuscrito.png" alt="" width={1536} height={1024} sizes="112px" /></a>
+        <div><strong>Victor Hugo</strong><span>© 2026 · {text("Desenvolvedor de Software", "Software Developer")}</span></div>
+      </div>
+      <nav className={styles.footerNav} aria-label={text("Navegação do rodapé", "Footer navigation")}>
+        <a href="#about">{text("Sobre", "About")}</a><a href="#projects">{text("Projetos", "Projects")}</a><a href="#education">{text("Formação", "Education")}</a><a href="#top">{text("Voltar ao topo", "Back to top")} <FiArrowUp aria-hidden="true" /></a>
+      </nav>
+      <p className={styles.footerTech}>{text("Desenvolvido com", "Built with")} Next.js · React · TypeScript</p>
+    </footer>
+  </StudioSection>;
 }

@@ -1,0 +1,128 @@
+.about {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: max(760px, 100svh);
+  color: #f5f7fa;
+  background: #040a12;
+}
+
+/* Replace the old chapter's solid backdrop with the supplied office image. */
+.about:global(#about)::after { content: none; }
+.background, .shade { position: absolute; inset: 0; pointer-events: none; }
+.background { z-index: -3; inset: -4px; }
+.background img { object-fit: cover; object-position: center; filter: blur(1px) brightness(.8); }
+.shade {
+  z-index: -2;
+  background: linear-gradient(90deg, rgb(2 6 12 / 28%), rgb(2 6 12 / 12%) 58%, rgb(2 6 12 / 24%)),
+    linear-gradient(180deg, rgb(4 6 9 / 40%), transparent 24%, transparent 73%, rgb(4 6 9 / 60%));
+}
+.inner {
+  width: min(1480px, 88%);
+  min-height: inherit;
+  margin-inline: auto;
+  padding-block: clamp(126px, 18svh, 180px) clamp(70px, 12svh, 115px);
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+  gap: clamp(45px, 6vw, 100px);
+  align-content: center;
+  padding-bottom: 0;
+}
+.eyebrow {
+  margin: 0 0 32px 43px;
+  color: #c2cce0;
+  font-size: clamp(14px, 1.22vw, 21px);
+  letter-spacing: .16em;
+  line-height: 1.5;
+}
+.identity h2 {
+  margin: 0;
+  padding-left: 39px;
+  border-left: 3px solid #0665ff;
+  font-size: clamp(45px, 4.85vw, 84px);
+  line-height: 1.04;
+  letter-spacing: -.045em;
+  font-weight: 700;
+}
+.prose { padding-top: 60px; }
+.prose p {
+  margin: 25px 0 0;
+  color: #bac5db;
+  font-size: clamp(18px, 1.58vw, 27px);
+  line-height: 1.5;
+  letter-spacing: -.015em;
+}
+.prose .lead {
+  margin-top: 0;
+  color: #f4f6fa;
+  font-size: clamp(22px, 1.85vw, 32px);
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px 40px;
+  padding-block: 22px 32px;
+  border-bottom: 1px solid rgb(170 193 226 / 18%);
+  font-size: clamp(15px, 1.25vw, 21px);
+  line-height: 1.6;
+}
+.facts { display: flex; flex-wrap: wrap; gap: 5px 22px; margin: 0; }
+.facts i { color: #acb9cb; font-style: normal; }
+.bottom a {
+  color: #1977ff;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  gap: 15px;
+  font-weight: 550;
+  transition: color .25s;
+}
+.bottom a span { transition: transform .25s; }
+.bottom a:hover { color: #87b7ff; }
+.bottom a:hover span { transform: translateX(4px); }
+.bottom a:focus-visible { outline: 2px solid #87b7ff; outline-offset: 6px; }
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .main { gap: 38px; }
+  .identity h2 { padding-left: 24px; font-size: 4.9vw; }
+  .eyebrow { margin-left: 28px; }
+  .prose { padding-top: 35px; }
+  .prose .lead { font-size: 23px; }
+  .prose p { font-size: 18px; }
+  .facts { gap: 5px 13px; }
+}
+@media (max-width: 760px) {
+  .about { min-height: 0; }
+  .inner { width: 86%; padding-block: 92px 60px; }
+  .main { grid-template-columns: minmax(0, 1fr); gap: 36px; padding-bottom: 44px; }
+  .background img { object-position: 57% center; filter: blur(1px) brightness(.62); }
+  .shade { background: linear-gradient(90deg, rgb(2 6 12 / 42%), rgb(2 6 12 / 22%)), linear-gradient(180deg, #040609, transparent 24%, transparent 70%, rgb(4 6 9 / 60%)); }
+  .eyebrow { margin: 0 0 22px 24px; font-size: 13px; }
+  .identity h2 { border-left-width: 2px; padding-left: 22px; font-size: clamp(36px, 9.8vw, 66px); line-height: 1.1; }
+  .prose { padding-top: 0; }
+  .prose .lead { font-size: clamp(19px, 4.9vw, 25px); line-height: 1.5; }
+  .prose p { margin-top: 22px; font-size: 17px; line-height: 1.65; }
+  .bottom { display: flex; align-items: flex-start; flex-direction: column; gap: 20px; padding-block: 18px 26px; font-size: 14px; }
+  .facts { gap: 4px 12px; }
+  .facts span:last-child { flex-basis: 100%; }
+  .facts i:nth-of-type(2) { display: none; }
+  .bottom a { font-size: 16px; }
+}
+@media (max-width: 360px) {
+  .identity h2 { font-size: 32px; padding-left: 18px; }
+  .eyebrow { margin-left: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bottom a, .bottom a span { transition: none; }
+  .bottom a:hover span { transform: none; }
+}

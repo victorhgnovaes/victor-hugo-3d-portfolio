@@ -1,0 +1,20 @@
+:global(#main-content).flow { perspective: none; background: #040609; }
+:global(#main-content).flow > section { background: #040609; border-top-color: transparent; }
+.flow > section > div[aria-hidden="true"] {
+  mask-image: linear-gradient(to bottom,transparent 0,#000 125px,#000 calc(100% - 140px),transparent 100%);
+}
+.flow > section > div[aria-hidden="true"]:first-child::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  backdrop-filter: blur(7px);
+  mask-image: linear-gradient(to bottom,#000 0,transparent 155px,transparent calc(100% - 155px),#000 100%);
+}
+.flow [data-motion-reveal] { transition: opacity .8s ease,transform .8s cubic-bezier(.2,.65,.3,1),filter .8s ease; }
+.flow [data-motion-reveal="pending"] { opacity: 0; transform: translateY(24px); filter: blur(5px); }
+.flow [data-motion-reveal="visible"] { opacity: 1; transform: none; filter: none; }
+@media(max-width:760px) {
+  .flow > section > div[aria-hidden="true"] { mask-image: linear-gradient(to bottom,transparent 0,#000 85px,#000 calc(100% - 95px),transparent 100%); }
+  .flow > section > div[aria-hidden="true"]:first-child::after { backdrop-filter: blur(5px); mask-image: linear-gradient(to bottom,#000,transparent 105px,transparent calc(100% - 105px),#000); }
+}
+@media(prefers-reduced-motion:reduce) {
+  .flow [data-motion-reveal] { transition: none; opacity: 1; transform: none; filter: none; }
+}

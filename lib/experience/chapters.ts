@@ -13,8 +13,9 @@ export const chapters = [
   { id: "contact", domId: "contact", navLabel: "CONTACT", index: "10", range: [0.91, 1], scene: "finale" },
 ] as const satisfies readonly ChapterDefinition[];
 
-const primaryChapterIds = new Set<ChapterId>(["about", "experience", "nexus", "contact"]);
-export const primaryNavigation = chapters.filter(({ id }) => primaryChapterIds.has(id));
+const primaryChapterIds: readonly ChapterId[] = ["about", "nexus", "experience", "contact"];
+export const primaryNavigation = chapters.filter(({ id }) => primaryChapterIds.includes(id))
+  .sort((a, b) => primaryChapterIds.indexOf(a.id) - primaryChapterIds.indexOf(b.id));
 
 export function getChapterAtProgress(progress: number) {
   const normalized = Math.max(0, Math.min(1, progress));

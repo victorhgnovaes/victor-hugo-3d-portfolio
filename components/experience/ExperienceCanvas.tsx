@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { Component, useEffect, useState, type ErrorInfo, type ReactNode } from "react";
 import { updateExperienceSnapshot } from "@/lib/experience/timeline-store";
+import { useActiveChapter } from "@/hooks/useActiveChapter";
 import { useExperienceQuality } from "./AdaptiveQualityProvider";
 
 const ExperienceCanvasScene = dynamic(() => import("./ExperienceCanvasScene"), { ssr: false });
@@ -15,6 +16,7 @@ class CanvasErrorBoundary extends Component<{ children: ReactNode; onError: () =
 }
 
 export default function ExperienceCanvas() {
+  const activeChapter = useActiveChapter();
   const { decision, portalEnabled, reportWebGLFailure } = useExperienceQuality();
   const [ready, setReady] = useState(false);
 
@@ -31,6 +33,6 @@ export default function ExperienceCanvas() {
     return () => window.cancelAnimationFrame(frame);
   }, [decision.layer]);
 
-  if (decision.layer !== "webgl" || !ready) return null;
+  if (activeChapter === "hero" || decision.layer !== "webgl" || !ready) return null;
   return <div className="experienceCanvas" aria-hidden="true"><CanvasErrorBoundary onError={reportWebGLFailure}><ExperienceCanvasScene maxDpr={decision.maxDpr} portalEnabled={portalEnabled} onUnavailable={reportWebGLFailure} /></CanvasErrorBoundary></div>;
 }

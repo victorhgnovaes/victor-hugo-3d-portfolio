@@ -1,0 +1,176 @@
+.opening {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 640px;
+  height: 100svh;
+  color: #f5f7fa;
+  background: #040a12;
+  scroll-margin-top: 0;
+}
+
+.office, .shade { position: absolute; inset: 0; pointer-events: none; }
+.office {
+  z-index: -3;
+  inset: -22px;
+  transform: translate3d(var(--office-x, 0px), var(--office-y, 0px), 0) scale(1.025);
+}
+.office img { object-fit: cover; object-position: center; }
+.shade {
+  z-index: -2;
+  background: linear-gradient(90deg, rgb(1 5 10 / 28%), rgb(2 7 14 / 12%) 47%, rgb(2 6 12 / 24%)),
+    linear-gradient(0deg, #040609 0%, transparent 19%, transparent 82%, rgb(2 5 10 / 32%));
+}
+.content {
+  --portrait-size: min(46vw, 82svh, 850px);
+  --portrait-right: -24px;
+  --portrait-bottom: -14px;
+  width: min(1480px, 88%);
+  height: 100%;
+  margin-inline: auto;
+  position: relative;
+}
+.copy {
+  position: relative;
+  z-index: 3;
+  width: 52%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+}
+.identity { border-left: 3px solid #0665ff; padding-left: clamp(20px, 2vw, 34px); }
+.identity h1 {
+  margin: -0.1em 0 0;
+  font-size: clamp(44px, 5.3vw, 92px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+}
+.identity p {
+  margin: 15px 0 0;
+  font-size: clamp(20px, 2.25vw, 39px);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #c2c8d8;
+}
+.actions { display: flex; align-items: center; gap: 24px; margin-top: 44px; }
+.actions a {
+  min-height: 64px;
+  padding: 15px 30px;
+  border: 1px solid #a5b3c9;
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  font-size: clamp(15px, 1.25vw, 21px);
+  font-weight: 450;
+  line-height: 1.4;
+  transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
+}
+.actions .primary { background: #064bed; border-color: #1b63ff; box-shadow: 0 5px 24px rgb(0 29 104 / 20%); }
+.actions .secondary { min-width: 170px; background: rgb(3 8 16 / 40%); }
+.actions a:hover { transform: translateY(-2px); border-color: #b7d2ff; background: #0d2343; }
+.actions .primary:hover { background: #1b5bfa; box-shadow: 0 7px 28px rgb(0 60 200 / 25%); }
+.actions a:focus-visible { outline: 2px solid #d9e9ff; outline-offset: 5px; }
+.visual { position: absolute; inset: 0; pointer-events: none; }
+.brandLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Subtract the original portrait silhouette before applying the photo's fade.
+     The mark cannot show through the face, shirt, or the fading hem. */
+  mask-image: linear-gradient(#fff, #fff), url("/nova-abertura/02_foto_recortada.png");
+  mask-size: 100% 100%, var(--portrait-size) var(--portrait-size);
+  mask-position: center, right var(--portrait-right) bottom var(--portrait-bottom);
+  mask-repeat: no-repeat;
+  mask-composite: exclude;
+}
+.monogram {
+  position: absolute;
+  z-index: 0;
+  width: min(80vw, 1500px);
+  right: -19%;
+  top: -2%;
+  opacity: .35;
+  animation: brandPulse 7s ease-in-out infinite;
+}
+.monogram img { display: block; width: 100%; height: auto; }
+.portrait {
+  position: absolute;
+  z-index: 1;
+  right: var(--portrait-right);
+  bottom: var(--portrait-bottom);
+  width: var(--portrait-size);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 74%, rgb(0 0 0 / 88%) 82%, transparent 99%);
+}
+.portrait img { display: block; width: 100%; height: auto; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .identity { animation: enter 1s cubic-bezier(.2,.65,.3,1) both; }
+  .actions { animation: enter 1s .12s cubic-bezier(.2,.65,.3,1) both; }
+  .portrait img { animation: enter 1.3s .08s cubic-bezier(.2,.65,.3,1) both; }
+}
+@keyframes enter { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes brandPulse {
+  0%, 100% { opacity: .3; filter: drop-shadow(0 0 4px rgb(0 76 255 / 8%)); }
+  50% { opacity: .4; filter: drop-shadow(0 0 9px rgb(0 76 255 / 18%)); }
+}
+.opening[data-motion-paused="true"] .monogram { animation-play-state: paused; }
+
+@media (min-width: 761px) and (max-width: 1100px) {
+  .content { width: 88%; --portrait-size: 49vw; --portrait-right: -4.4vw; }
+  .copy { width: 56%; }
+  .identity h1 { font-size: clamp(40px, 5.3vw, 58px); }
+  .identity p { font-size: clamp(19px, 2.3vw, 26px); }
+  .actions { gap: 12px; margin-top: 32px; }
+  .actions a { padding-inline: 20px; gap: 12px; }
+  .actions .secondary { min-width: 110px; }
+  .monogram { top: 18%; right: -24%; width: 88vw; }
+}
+
+@media (max-width: 760px) {
+  .opening { height: auto; min-height: 100svh; }
+  .content {
+    --portrait-size: min(125vw, 600px);
+    --portrait-right: calc((100vw - var(--portrait-size)) / 2);
+    --portrait-bottom: -12px;
+    width: 100%; min-height: 100svh; display: flex; flex-direction: column; padding-top: 108px;
+  }
+  .office img { object-position: 34% center; }
+  .shade { background: linear-gradient(180deg, rgb(2 7 15 / 26%), rgb(2 7 15 / 72%) 40%, rgb(2 7 15 / 22%) 65%, #040609 100%); }
+  .copy { width: 100%; height: auto; padding: 0 7%; align-items: stretch; }
+  .identity { padding-left: 18px; border-left-width: 2px; }
+  .identity h1 { font-size: clamp(38px, 10vw, 66px); letter-spacing: -.045em; }
+  .identity p { margin-top: 9px; font-size: clamp(17px, 4.5vw, 27px); }
+  .actions { gap: 12px; margin-top: 26px; }
+  .actions a { min-height: 50px; padding: 13px 18px; font-size: 14px; gap: 13px; border-radius: 7px; }
+  .actions .primary { flex: 1.5; }
+  .actions .secondary { flex: 1; min-width: 0; }
+  .visual { position: relative; inset: auto; width: 100%; flex: 1; min-height: clamp(370px, 105vw, 620px); margin-top: 20px; }
+  .monogram {
+    width: min(168vw, 1000px);
+    right: 50%;
+    top: auto;
+    bottom: calc(var(--portrait-bottom) + var(--portrait-size) * .11);
+    transform: translateX(50%);
+  }
+}
+
+@media (max-width: 360px) {
+  .copy { padding-inline: 6%; }
+  .identity h1 { font-size: 36px; }
+  .identity p { font-size: 16px; }
+  .actions { gap: 8px; }
+  .actions a { padding-inline: 12px; font-size: 13px; gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .office { transform: none; }
+  .monogram, .identity, .actions, .portrait img { animation: none; }
+  .actions a { transition: none; }
+  .actions a:hover { transform: none; }
+}

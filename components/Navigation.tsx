@@ -73,15 +73,15 @@ export default function Navigation() {
     }, 0);
   };
 
-  return <><a className="skipLink" href="#main-content">{text("PULAR PARA O CONTEÚDO", "SKIP TO CONTENT")}</a><header className={`nav ${scrolled ? "navScrolled" : ""}`}>
+  return <><a className="skipLink" href="#main-content">{text("PULAR PARA O CONTEÚDO", "SKIP TO CONTENT")}</a><header className={`nav ${scrolled ? "navScrolled" : "navOpening"}`}>
     <div className="navInner">
-      <a href="#top" className="brand" aria-label={text("Voltar ao início", "Back to top")}>
-        <Image src="/victor-hugo-brand.png" alt="Victor Hugo" width={56} height={56} sizes="(max-width: 760px) 48px, 56px" priority />
+      <a href="#top" className="brand brandSignature" aria-label={text("Voltar ao início", "Back to top")}>
+        <Image src="/nova-abertura/05_vh_manuscrito.png" alt="Victor Hugo" width={1536} height={1024} sizes="112px" priority />
       </a>
       <nav ref={navigation} id="primary-navigation" aria-hidden={isMobile && !open} inert={isMobile && !open ? true : undefined} className={open ? "navLinks open" : "navLinks"}>
         {primaryNavigation.map(({ id, domId, navLabel }) => {
           const targetId = id === "nexus" ? "projects" : domId;
-          const label = id === "about" ? text("SOBRE", "ABOUT") : id === "experience" ? text("EXPERIÊNCIA", "EXPERIENCE") : id === "nexus" ? text("PROJETOS", "PROJECTS") : id === "contact" ? text("CONTATO", "CONTACT") : navLabel;
+          const label = id === "about" ? text("Sobre", "About") : id === "experience" ? text("Experiência", "Experience") : id === "nexus" ? text("Projetos", "Projects") : id === "contact" ? text("Contato", "Contact") : navLabel;
           const projectActive = id === "nexus" && ["nexus", "ecar", "black-widow", "novatech", "phazion"].includes(activeChapter);
           const isActive = activeChapter === id || projectActive;
           return <a key={id} className={isActive ? "navActive" : ""} aria-current={isActive ? "location" : undefined} href={`#${targetId}`} onClick={() => handleNavigation(targetId)}>{label}</a>;

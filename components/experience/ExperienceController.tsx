@@ -20,7 +20,7 @@ export default function ExperienceController() {
     const measure = () => {
       bounds = chapters.flatMap(({ id, domId }) => {
         const element = document.getElementById(domId);
-        if (!element) return [];
+        if (!element || element.hasAttribute("data-chapter-alias")) return [];
         const rect = element.getBoundingClientRect();
         return [{ id, top: rect.top + window.scrollY, bottom: rect.bottom + window.scrollY }];
       });

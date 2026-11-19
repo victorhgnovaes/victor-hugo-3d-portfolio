@@ -13,6 +13,8 @@ export default function SectionRail() {
   const activeIndex = chapters.findIndex(({ id }) => id === active);
   const railStyle = { "--rail-progress": `${((activeIndex + 1) / chapters.length) * 100}%` } as CSSProperties;
 
+  if (active === "hero" || active === "about" || active === "experience") return null;
+
   return <aside className="sectionRail" aria-label={text("Navegação entre seções","Section navigation")} style={railStyle}>
     <span className="railMark" aria-hidden="true"><Image src="/victor-hugo-brand.png" alt="" width={30} height={30} /></span>
     <span className="railLabel">{text("JORNADA DEV","DEV JOURNEY")}</span>

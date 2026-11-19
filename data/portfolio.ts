@@ -11,7 +11,7 @@ export const profile = {
   links: {
     whatsapp: "https://wa.me/5511993706252?text=Ol%C3%A1%2C%20Victor!%20Vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20sobre%20um%20projeto%20ou%20oportunidade.",
     email: "victorhg.novaes@gmail.com",
-    linkedin: "https://www.linkedin.com/in/victor-hugo-novaes-dos-santos-870b08400",
+    linkedin: "https://www.linkedin.com/in/victor-novaes-dev/",
     github: "https://github.com/victorhgnovaes",
     resume: "",
   },
@@ -51,6 +51,26 @@ export const personalProjects = [
   { code: "P", title: "Phazion Quest", subtitle: "Solo · Hand-drawn 2D Game", year: "2026", visual: "game", description: "Jogo 2D autoral desenvolvido individualmente no Scratch, com arte e animações produzidas à mão frame a frame.", features: ["OOP", "Movimentação", "Colisões", "Combate", "Enemy AI", "Scrum"], stack: ["Scratch", "Frame-by-frame", "Game Development", "OOP"], link: "https://scratch.mit.edu/projects/1216501586/" },
   { code: "A", title: "AI Engineering Lab", subtitle: "Agentic Development Practice", year: "2026", visual: "agent", description: "Ambiente de prática para planejamento, implementação, debugging e refatoração assistidos por agentes.", features: ["Agents", "Automation", "Context Engineering", "Debugging", "Refactoring"], stack: ["OpenAI Codex", "Claude Code", "GitHub Copilot", "Cursor"] },
 ];
+
+export const ecarExperience = {
+  role: "Desenvolvedor Full Stack",
+  company: "ECAR Frotas",
+  period: "AUG 2025 — PRESENT",
+  description: "Atuação no desenvolvimento de soluções web para apoiar operações comerciais e digitais da eCar Frotas, participando desde a estruturação da aplicação até a implementação e publicação dos projetos.",
+  highlights: [
+    "Desenvolvimento de aplicações web utilizando React, TypeScript e Vite, com foco em performance, responsividade e experiência do usuário.",
+    "Desenvolvimento de APIs REST com Node.js e NestJS, estruturando a comunicação entre front-end, back-end e banco de dados.",
+    "Modelagem e integração de bancos de dados PostgreSQL, utilizando Prisma ORM para gerenciamento e acesso aos dados.",
+    "Desenvolvimento de catálogos e plataformas comerciais para apresentação de veículos, versões, cores, especificações e condições comerciais.",
+    "Desenvolvimento do projeto eCar × Aurora Alimentos, criando uma solução web responsiva para consulta e apresentação do catálogo de veículos destinado à operação comercial.",
+    "Implementação de interfaces responsivas para desktop e mobile, seguindo identidade visual e requisitos específicos de cada projeto.",
+    "Criação de fluxos comerciais integrados ao WhatsApp, facilitando o contato e o envio de propostas a partir da plataforma.",
+    "Utilização de Git e GitHub para versionamento, organização do código e gerenciamento das evoluções dos projetos.",
+    "Uso de Python e scripts JavaScript/TypeScript para tratamento, importação e organização de dados utilizados pelas aplicações.",
+    "Participação no ciclo completo de desenvolvimento: levantamento de requisitos, arquitetura, desenvolvimento, integração, testes, versionamento e deploy.",
+  ],
+  skills: ["React", "TypeScript", "Node.js", "NestJS", "PostgreSQL", "Prisma", "Vite", "Python", "Git", "GitHub", "APIs REST", "JavaScript"],
+};
 
 export const experience = [
   { period: "DEC 2024 — PRESENT", location: "São Paulo · Brazil", role: "Software Development", company: "Independent / Academic Projects", description: "Desenvolvimento de projetos completos envolvendo front-end, back-end, APIs, PostgreSQL, aplicações desktop, arquitetura, autenticação, regras de negócio e agentes de IA.", skills: ["Front-end", "Back-end", "APIs", "PostgreSQL", "Desktop", "Architecture", "Git", "GitHub", "Scrum", "AI Agents"] },
